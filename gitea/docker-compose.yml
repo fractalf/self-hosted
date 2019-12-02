@@ -1,0 +1,35 @@
+version: "3.7"
+
+services:
+    gitea:
+        container_name: gitea
+        image: gitea/gitea:latest
+        restart: always
+        environment:
+            SECRET_KEY: ${PASSWORD}
+            RUN_MODE: prod
+            SSH_DOMAIN: ${DOMAIN}
+            ROOT_URL: https://${DOMAIN}
+
+            VIRTUAL_PORT: ${PORT_WEB}
+            VIRTUAL_HOST: ${DOMAIN}
+            LETSENCRYPT_HOST: ${DOMAIN}
+            LETSENCRYPT_EMAIL: ${EMAIL}
+        volumes:
+            - gitea:/data
+        ports:
+            - "${PORT_WEB}:3000"
+            - "${PORT_SSH}:22"
+
+networks:
+    default:
+        external:
+            name: ${NETWORK}
+
+volumes:
+    gitea:
+        driver_opts:
+            type: none
+            o: bind
+            device: ${DATA_PATH}
+

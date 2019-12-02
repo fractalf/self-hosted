@@ -1,0 +1,33 @@
+version: "3.7"
+
+services:
+    radicale:
+        image: ${NAMESPACE}/radicale
+        build: ./
+        container_name: radicale
+        restart: always
+        environment:
+            GIT_NAME: ${GIT_NAME}
+            GIT_EMAIL: ${GIT_EMAIL}
+            VIRTUAL_PORT: ${PORT}
+            VIRTUAL_HOST: ${DOMAIN}
+            LETSENCRYPT_HOST: ${DOMAIN}
+            LETSENCRYPT_EMAIL: ${EMAIL}
+        volumes:
+            - radicale:/data
+            - ./config:/etc/radicale:ro
+        ports:
+            - "${PORT}:5232"
+
+networks:
+    default:
+        external:
+            name: ${NETWORK}
+
+volumes:
+    radicale:
+        driver_opts:
+            type: none
+            o: bind
+            device: ${DATA_PATH}
+

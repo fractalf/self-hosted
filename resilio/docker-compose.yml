@@ -1,0 +1,31 @@
+version: "3.7"
+
+services:
+    resilio:
+        container_name: resilio
+        image: resilio/sync
+        restart: always
+        environment:
+            VIRTUAL_PORT: ${PORT_WEB}
+            VIRTUAL_HOST: ${DOMAIN}
+            LETSENCRYPT_HOST: ${DOMAIN}
+            LETSENCRYPT_EMAIL: ${EMAIL}
+
+        ports:
+            - "${PORT_WEB}:8888"
+            - "${PORT_SYNC}:55555"
+        volumes:
+            - resilio:/mnt/sync
+
+networks:
+    default:
+        external:
+            name: ${NETWORK}
+
+volumes:
+    resilio:
+        driver_opts:
+            type: none
+            o: bind
+            device: ${DATA_PATH}
+
