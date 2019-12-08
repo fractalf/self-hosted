@@ -18,28 +18,16 @@ https://gitea.io/
 
 Got some sensitive data you don't trust Github with? This is a super sweet open source git repo hosting server where you have full control of your data. It has all you need to host your own repos and the GUI is quite similar to Github (I'll give them that, they have excellent GUI).
 
+[more..](gitea/README.md)
+
 # Radicale
 
 https://radicale.org/
 
 Sick of storing all your contacts at Google? Well I certainly was, so I installed this free and open-source CalDAV/CardDAV server to host my contacts.
 
-I modified the official Dockerfile a bit
+[more..](radicale/README.md)
 
-* Don't run as root!
-* Changed some paths
-
-I made a small `git.sh` script to make the whole git thing run more smoothly.
-
-**Important!**
-
-You need to make a file `./config/users` containing users/passwords. This is as easy as:
-
-```
-htpasswd -B -C 10 users <user>
-```
-
-I'm using [this open-source Android app](https://www.davx5.com) to sync my contacts.
 
 # Resilio
 

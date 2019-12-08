@@ -8,9 +8,11 @@ services:
         environment:
             SECRET_KEY: ${PASSWORD}
             RUN_MODE: prod
+            DISABLE_REGISTRATION: 'true'
+            REQUIRE_SIGNIN_VIEW: 'true'
             SSH_DOMAIN: ${DOMAIN}
             ROOT_URL: https://${DOMAIN}
-
+            # For ngix-proxy:
             VIRTUAL_PORT: ${PORT_WEB}
             VIRTUAL_HOST: ${DOMAIN}
             LETSENCRYPT_HOST: ${DOMAIN}
